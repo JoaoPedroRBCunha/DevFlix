@@ -13,6 +13,28 @@ Além disso, os requisitos incluem:
 <li>Manutenção modular, com atualizações frequentes de serviços sem impacto no sistema completo.</li>
 </ul>
 
+## Para rodar:
+<strong>Para baixar as dependências:</strong>
+```shell
+npm install
+```
+
+<strong>Para criar o banco:</strong>
+```shell
+npx sequelize-cli db:create
+```
+
+<strong>Para criar as tabelas e baixar as migrações:</strong>
+```shell
+npx sequelize-cli db:migrate
+```
+
+<strong>Nos arquivos sequelizeCli.js e index.ts troque username e password para o da sua máquina:</strong>
+```shell
+username: "user"
+password: "password"
+```
+
 ## Arquitetura:
 Optamos pela <strong>Arquitetura de Microsserviços</strong> devido à necessidade de escalabilidade e 
 independência entre módulos. A aplicação será dividida em serviços especializados, cada um cuidando 
