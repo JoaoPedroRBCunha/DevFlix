@@ -13,23 +13,33 @@ Além disso, os requisitos incluem:
 <li>Manutenção modular, com atualizações frequentes de serviços sem impacto no sistema completo.</li>
 </ul>
 
-## Para rodar:
-<strong>Para baixar as dependências:</strong>
+## Para rodar aplicação:
+```shell
+npm run dev
+```
+
+## Para configurar aplicação:
+<strong>Baixar as dependências:</strong>
 ```shell
 npm install
 ```
 
-<strong>Para criar o banco:</strong>
+<strong>Criar a pasta:</strong>
+```shell
+uploads 
+```
+
+<strong>Criar o banco:</strong>
 ```shell
 npx sequelize-cli db:create
 ```
 
-<strong>Para criar as tabelas e baixar as migrações:</strong>
+<strong>Criar as tabelas e baixar as migrações:</strong>
 ```shell
 npx sequelize-cli db:migrate
 ```
 
-<strong>Nos arquivos sequelizeCli.js e index.ts troque username e password para o da sua máquina:</strong>
+<strong>Troque nos arquivos sequelizeCli.js e index.ts por username e password da sua máquina:</strong>
 ```shell
 username: "user"
 password: "password"
