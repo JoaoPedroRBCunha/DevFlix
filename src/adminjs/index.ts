@@ -3,8 +3,9 @@ import adminJsExpress from "@adminjs/express";
 import adminJsSequelize from "@adminjs/sequelize";
 import { sequelize } from "../database";
 import { adminJsResources } from "./resources";
-import { User } from "../models";
+import { Category, Course, Episode, User } from "../models";
 import bcrypt from "bcrypt";
+import { locale } from "./locale";
 
 AdminJS.registerAdapter(adminJsSequelize);
 
@@ -12,6 +13,7 @@ export const adminJsInst = new AdminJS({
   databases: [sequelize],
   rootPath: "/admin",
   resources: adminJsResources,
+  locale: locale,
   branding: {
     companyName: "devFlix",
     logo: "/devFlix.svg",
