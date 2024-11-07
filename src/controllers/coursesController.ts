@@ -6,7 +6,6 @@ import { getPaginationParams } from "../helpers/getPaginationParams";
 export const coursesController = {
   show: async (req: Request, res: Response) => {
     const { id } = req.params;
-
     try {
       const course = await courseService.findByIdWithEpisodes(id);
       return res.json(course);
@@ -39,7 +38,6 @@ export const coursesController = {
   search: async (req: Request, res: Response) => {
     const { name } = req.query;
     const [page, perPage] = getPaginationParams(req.query);
-
     try {
       if (typeof name !== "string") throw new Error("name param must be of type string");
       const courses = await courseService.findByName(name, page, perPage);
