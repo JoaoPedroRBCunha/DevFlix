@@ -3,7 +3,9 @@
 import { sequelize } from "../database";
 import { DataTypes, Model, Optional } from "sequelize";
 import bcrypt from "bcrypt";
+import { callActionApi } from "adminjs";
 
+type CheckPasswordCallback = (err?: Error, isSame?: boolean) => void;
 export interface User {
   id: number;
   firstName: string;
@@ -17,7 +19,9 @@ export interface User {
 
 export interface UserCreationAttributes extends Optional<User, "id"> {}
 
-export interface UserInstance extends Model<User, UserCreationAttributes>, User {}
+export interface UserInstance extends Model<User, UserCreationAttributes>, User {
+  checkPassword: (password: string, callbackfn: CheckPasswordCallback) => void;
+}
 
 export const User = sequelize.define<UserInstance, User>(
   "users",
@@ -74,3 +78,10 @@ export const User = sequelize.define<UserInstance, User>(
     },
   }
 );
+//assim adiciona o método à todas as instâncias
+User.prototype.checkPassword = function (password: string, callbackfn: CheckPasswordCallback) {
+  bcrypt.compare(password, this.password, (err, isSame) => {
+    if (err) callbackfn(err);
+    else callbackfn(err, isSame);
+  });
+};
