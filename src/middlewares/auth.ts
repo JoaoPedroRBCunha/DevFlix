@@ -11,15 +11,16 @@ export interface AuthenticatedRequest extends Request {
 export function ensureAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const authorizationHeader = req.headers.authorization;
 
-  if (!authorizationHeader)
-    return res.status(401).json({ message: "Não autorizado, nenhum token encontrado" });
+  if (!authorizationHeader) {
+    return res.status(401).json({ message: "Não autorizado: nenhum token encontrado" });
+  }
 
-  const token = authorizationHeader.replace(/Bearer/, "");
+  const token = authorizationHeader.replace(/Bearer /, "");
 
   jwtService.verifyToken(token, async (err, decoded) => {
-    if (err || typeof decoded === "undefined")
+    if (err || typeof decoded === "undefined") {
       return res.status(401).json({ message: "Não autorizado, token inválido" });
-
+    }
     const user = await userService.findByEmail((decoded as JwtPayload).email);
     req.user = user;
     next();
