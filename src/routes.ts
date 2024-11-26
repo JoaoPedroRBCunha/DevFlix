@@ -28,7 +28,7 @@ router.post("/episodes/:id/watchTime", ensureAuth, episodesController.setWatchTi
 
 router.get("/favorites", ensureAuth, favoritesController.index);
 router.post("/favorites", ensureAuth, favoritesController.save);
-router.delete("/favorites", ensureAuth, favoritesController.delete);
+router.delete("/favorites/:courseId", ensureAuth, favoritesController.delete);
 
 router.get("/users/current", ensureAuth, usersController.show);
 router.get("/users/current/watching", ensureAuth, usersController.watching);
@@ -36,5 +36,5 @@ router.put("/users/current", ensureAuth, usersController.update);
 router.put("/users/current/password", ensureAuth, usersController.updatePassword);
 
 router.post("/likes", ensureAuth, likesController.save);
-router.delete("/likes", ensureAuth, likesController.delete);
+router.delete("/likes/:courseId", ensureAuth, likesController.delete);
 export { router };
